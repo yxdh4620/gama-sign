@@ -1,0 +1,32 @@
+{
+  "name": "gama-sign",
+  "description": "gama http 请求通用签名算法模块",
+  "version": "0.0.1",
+  "homepage": "https://github.com/yxdh4620/gama-sign",
+  "author": {
+    "name": "yxdh4620"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yxdh4620/gama-sign.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yxdh4620/gama-sign/issues"
+  },
+  "scripts": {
+    "coffee": "coffee -o ./lib/ -cw ./src/"
+  },
+
+  "main": "index.js",
+
+  "dependencies": {
+    "coffee-script": "1.8.0",
+    "underscore": "1.5.2",
+    "oauth-sign": "0.4.0"
+  },
+
+  "devDependencies": {
+    "nodemon": "latest"
+  },
+  "keywords": ["nodejs","http", "sign"]
+}

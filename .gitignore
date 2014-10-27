@@ -1,4 +1,17 @@
 # Logs
+/node_modules/
+*.swp
+*.swo
+*.swn
+*.orig
+.DS_Store
+npm-debug.log
+assets/
+dist/
+log/
+production/
+tags
+build/
 logs
 *.log
 
