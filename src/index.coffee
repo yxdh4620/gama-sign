@@ -36,6 +36,12 @@ GamaSign =
     timestamp = parseInt(timestamp,10)
     return new Date().getTime() < (timestamp+milliseconds)
 
+  # 验证http的方法：
+  # param httpMethod : http 的方法
+  # return boolean true: 通过验证， false: 未通过验证
+  verifyMethod : (httpMethod) ->
+    return httpMethod? and _.isString(httpMethod) and _.indexOf(HTTP_METHODS, httpMethod.toUpperCase()) != -1
+
   #签名：
   # param httpMethod: String（必须） http 请求的方式（"GET"，"POST"）
   # param baseUri: String(必须) http 请求的地址
@@ -47,20 +53,14 @@ GamaSign =
   makeSign : (httpMethod, baseUri, params, ignoreParams, accessKeyId, accessKeySecret) ->
     params = params||{}
     ignoreParams = ignoreParams||{}
-    sign = oauthSign.hmacsign(httpMethod, baseUri, removeIgnoreParams(params, ignoreParams), accessKeyId, accessKeySecret)
+    sign = oauthSign.hmacsign(httpMethod, baseUri, @removeIgnoreParams(params, ignoreParams), accessKeyId, accessKeySecret)
     return sign
-
-  # 验证http的方法：
-  # param httpMethod : http 的方法
-  # return boolean true: 通过验证， false: 未通过验证
-  verifyMethod : (httpMethod) ->
-    return httpMethod? and _.indexOf(HTTP_METHODS, httpMethod) != -1
 
   # 去除不参与计算sign的params
   removeIgnoreParams: (params, ignoreParams) ->
     ignoreParams = ignoreParams||[]
     newParams = _.clone(params||{})
-    for key, val in newParams
+    for key, val of newParams
       if key is DEFAULT_SIGN_NAME or _.indexOf(ignoreParams, key) != -1
         delete newParams[key]
     return newParams
